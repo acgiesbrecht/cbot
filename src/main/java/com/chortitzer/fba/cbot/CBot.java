@@ -154,6 +154,10 @@ public class CBot {
             message.setFrom(new InternetAddress("cbot.industria@chortitzer.com.py"));
             message.addRecipients(Message.RecipientType.TO,
                     InternetAddress.parse("adriang@chortitzer.com.py"));
+            message.addRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse("christophh@chortitzer.com.py"));
+            message.addRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse("oliverw@chortitzer.com.py"));
             message.setSubject("Cotizacion Semanal de Granos - Balanceados Chortitzer");
             message.setText(
                     "<html><body>"
