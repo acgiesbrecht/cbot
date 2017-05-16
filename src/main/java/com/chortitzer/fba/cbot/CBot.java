@@ -14,6 +14,7 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -69,6 +70,12 @@ public class CBot {
             for (int i = 0; i < 5; i++) {
                 priceCentUsdPerBushelMaiz += arrMaiz.getJSONArray(i).getDouble(4);
                 priceCentUsdPerBushelSoja += arrSoja.getJSONArray(i).getDouble(4);
+            }
+
+            if (priceCentUsdPerBushelMaiz == 0 || priceCentUsdPerBushelSoja == 0) {
+                TimeUnit.MINUTES.sleep(10);
+                execute();
+                return;
             }
 
             priceCentUsdPerBushelMaiz = priceCentUsdPerBushelMaiz / 5;
