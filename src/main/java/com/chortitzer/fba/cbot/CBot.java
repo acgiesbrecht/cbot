@@ -98,6 +98,11 @@ public class CBot {
 
             pygPorUSD = getPYGporUSD();
 
+            while (pygPorUSD == 0) {
+                TimeUnit.MINUTES.sleep(10);
+                pygPorUSD = getPYGporUSD();
+            }
+
             precioPygMaizSocios = (int) Math.round((priceUsdPerBushelMaiz / kgPerBushelMaiz - premioUsdPorKgMaiz) * pygPorUSD - fleteSocios);
             precioPygSorgoSocios = (int) Math.round((double) precioPygMaizSocios * 0.9);
             precioPygSojaSocios = (int) Math.round((priceUsdPerBushelSoja / kgPerBushelSoja - premioUsdPorKgSoja) * pygPorUSD - fleteSocios);
