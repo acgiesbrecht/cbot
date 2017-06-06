@@ -46,7 +46,7 @@ public class CBot {
     Double priceCentUsdPerBushelMaiz = 0.0;
     Double priceCentUsdPerBushelSoja = 0.0;
 
-    Double pygPorUSD = getPYGporUSD();
+    Double pygPorUSD = 0.0;
 
     int precioPygMaizSocios = 0;
     int precioPygSorgoSocios = 0;
@@ -217,12 +217,13 @@ public class CBot {
 
     private Double getPYGporUSD() {
         try {
-            Document doc = Jsoup.connect("http://www.maxicambios.com.py/index.php").get();
-            Element content = doc.getElementById("leftcontent");
-            Elements links = content.getElementsByTag("h1");
+            Document doc = Jsoup.connect("http://192.168.1.10/avisos/cinterno.php").get();
+            Elements links = doc.getElementsByClass("labelCompraVentaCajeros");
+            //links = links.get(0).getElementsByTag("td");
+            //links = links.get(0).getElementsByTag("tr");
 
-            String compra = links.get(0).text().replace(".", "");
-            String venta = links.get(1).text().replace(".", "");
+            String compra = links.get(0).text().split(" ")[1].replace(".", "");
+            String venta = links.get(1).text().split(" ")[1].replace(".", "");
 
             return Double.parseDouble(venta);
         } catch (Exception ex) {
