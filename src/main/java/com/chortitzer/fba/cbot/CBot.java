@@ -56,6 +56,9 @@ public class CBot {
     int precioPygSorgoNoSocios = 0;
     int precioPygSojaNoSocios = 0;
 
+    Double premioUsdTonMaiz = 38.0;
+    Double premioUsdTonSoja = 22.0;
+
     public void execute() {
         try {
             String urlSoja = "https://www.quandl.com/api/v3/datasets/CHRIS/CME_S1.json?api_key=BVdNGk1heNzSvQsCRBn8&start_date=2017-01-01";
@@ -67,7 +70,7 @@ public class CBot {
             JSONObject jsonObjSoja = new JSONObject(readUrl(urlSoja));
             JSONArray arrSoja = jsonObjSoja.getJSONObject("dataset").getJSONArray("data");
 
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 15; i++) {
                 priceCentUsdPerBushelMaiz += arrMaiz.getJSONArray(i).getDouble(4);
                 priceCentUsdPerBushelSoja += arrSoja.getJSONArray(i).getDouble(4);
             }
@@ -78,19 +81,19 @@ public class CBot {
                 return;
             }
 
-            priceCentUsdPerBushelMaiz = priceCentUsdPerBushelMaiz / 5;
-            priceCentUsdPerBushelSoja = priceCentUsdPerBushelSoja / 5;
+            priceCentUsdPerBushelMaiz = priceCentUsdPerBushelMaiz / 15;
+            priceCentUsdPerBushelSoja = priceCentUsdPerBushelSoja / 15;
 
             //convertt from cUSD to USD
             Double priceUsdPerBushelMaiz = priceCentUsdPerBushelMaiz / 100;
             Double priceUsdPerBushelSoja = priceCentUsdPerBushelSoja / 100;
 
             Double kgPerBushelMaiz = 25.40;
-            Double premioUsdTonMaiz = 0.0;
+
             Double premioUsdPorKgMaiz = premioUsdTonMaiz / 1000.0;
 
             Double kgPerBushelSoja = 27.22;
-            Double premioUsdTonSoja = 28.0;
+
             Double premioUsdPorKgSoja = premioUsdTonSoja / 1000.0;
 
             Double fleteSocios = 50.0;
@@ -187,7 +190,9 @@ public class CBot {
                     + "<b>Referencias:</b> <br />"
                     + "Cotizacion USD: " + formatPygUsd(pygPorUSD.intValue()) + "<br />"
                     + "Maiz - Cotizacion Promedio Chicago - Ultimos 5 dias: " + formatUsd(priceCentUsdPerBushelMaiz.intValue()) + "<br />"
-                    + "Soja - Cotizacion Promedio Chicago - Ultimos 5 dias: " + formatUsd(priceCentUsdPerBushelSoja.intValue()) + "<p>"
+                    + "Maiz - Premio: " + formatUsd(premioUsdTonMaiz.intValue()) + " USD/ton<br />"
+                    + "Soja - Cotizacion Promedio Chicago - Ultimos 5 dias: " + formatUsd(priceCentUsdPerBushelSoja.intValue()) + "<br />"
+                    + "Soja - Premio: " + formatUsd(premioUsdTonSoja.intValue()) + " USD/ton<p>"
                     + "<code>Este menaje ha sido generado automaticamente por el sistema cbot.industria</code><p>"
                     + "</body></html>", "utf-8", "html");
 
