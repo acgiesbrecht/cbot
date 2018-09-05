@@ -61,8 +61,8 @@ public class CBot {
 
     public void execute() {
         try {
-            String urlSoja = "https://www.quandl.com/api/v3/datasets/CHRIS/CME_S1.json?api_key=BVdNGk1heNzSvQsCRBn8&start_date=2017-01-01";
-            String urlMaiz = "https://www.quandl.com/api/v3/datasets/CHRIS/CME_C1.json?api_key=BVdNGk1heNzSvQsCRBn8&start_date=2017-01-01";
+            String urlSoja = "https://www.quandl.com/api/v3/datasets/CHRIS/CME_S1.json?api_key=BVdNGk1heNzSvQsCRBn8&start_date=2018-01-01";
+            String urlMaiz = "https://www.quandl.com/api/v3/datasets/CHRIS/CME_C1.json?api_key=BVdNGk1heNzSvQsCRBn8&start_date=2018-01-01";
 
             JSONObject jsonObjMaiz = new JSONObject(readUrl(urlMaiz));
             JSONArray arrMaiz = jsonObjMaiz.getJSONObject("dataset").getJSONArray("data");
@@ -169,10 +169,11 @@ public class CBot {
             message.setFrom(new InternetAddress("cbot.industria@chortitzer.com.py"));
             message.addRecipients(Message.RecipientType.TO,
                     InternetAddress.parse("adriang@chortitzer.com.py"));
-            message.addRecipients(Message.RecipientType.TO,
+            /*message.addRecipients(Message.RecipientType.TO,
                     InternetAddress.parse("christophh@chortitzer.com.py"));
             message.addRecipients(Message.RecipientType.TO,
                     InternetAddress.parse("oliverw@chortitzer.com.py"));
+            */
             message.setSubject("Cotizacion Semanal de Granos - Balanceados Chortitzer");
             message.setText(
                     "<html><body>"
